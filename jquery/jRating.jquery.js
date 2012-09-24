@@ -85,6 +85,7 @@
 					background: 'url('+bgPath+') repeat-x'
 				}
 			}).appendTo($(this));
+			
 
 			$(this).css({width: widthRatingContainer,overflow:'hidden',zIndex:1,position:'relative'});
 
