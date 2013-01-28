@@ -212,7 +212,7 @@ echo htmlentities('<!-- JS to add -->
 			
 			$('.exemple3').jRating({
 				step:true,
-				length : 20
+				length : 20 
 			});
 			
 			$('.exemple4').jRating({
