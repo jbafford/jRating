@@ -29,7 +29,7 @@
 <!-- EXEMPLE 1 : BASIC -->
 <div class="exemple">
 	<em>Exemple 1 (<strong>Basic exemple without options</strong>) :</em>
-	<div class="basic" id="12_1"></div>
+	<div class="basic" data-average="12" data-id="1"></div>
 </div>
 <div class="notice">
 <pre>
@@ -48,7 +48,7 @@ echo htmlentities('<!-- JS to add -->
 <!-- EXEMPLE 2 -->
 <div class="exemple">
 	<em>Exemple 2 (type : <strong>small</strong> - average <strong>10</strong> - id <strong>2</strong> - <strong>40</strong> stars) :</em>
-	<div class="exemple2" id="10_2"></div>
+	<div class="exemple2" data-average="10" data-id="2"></div>
 </div>
 <div class="notice">
 <pre>
@@ -71,7 +71,7 @@ echo htmlentities('<!-- JS to add -->
 <!-- EXEMPLE 3 -->
 <div class="exemple">
 	<em>Exemple 3 (step : <strong>true</strong> - average <strong>18</strong> - id <strong>3</strong> - <strong>15</strong> stars) :</em>
-	<div class="exemple3" id="18_3"></div>
+	<div class="exemple3" data-average="18" data-id="3"></div>
 </div>
 <div class="notice">
 <pre>
@@ -94,7 +94,7 @@ echo htmlentities('<!-- JS to add -->
 <!-- EXEMPLE 4 -->
 <div class="exemple">
 	<em>Exemple 4 (<strong>Rate is disabled</strong>) :</em>
-	<div class="exemple4" id="10_4"></div>
+	<div class="exemple4" data-average="10" data-id="4"></div>
 </div>
 <div class="notice">
 <pre>
@@ -115,7 +115,7 @@ echo htmlentities('<!-- JS to add -->
 <!-- EXEMPLE 5 -->
 <div class="exemple">
 	<em>Exemple 5 (<strong>With onSuccess &amp; onError methods</strong>) :</em>
-	<div class="exemple5" id="10_5"></div>
+	<div class="exemple5" data-average="10" data-id="5"></div>
 </div>
 <div class="notice">
 <pre>
@@ -140,10 +140,10 @@ echo htmlentities('<!-- JS to add -->
 </pre>
 </div>
 
-<!-- EXEMPLE 5 -->
+<!-- EXEMPLE 6 -->
 <div class="exemple">
 	<em>Exemple 6 (<strong>Disabled rate info</strong>) :</em>
-	<div class="exemple6" id="10_5"></div>
+	<div class="exemple6" data-average="10" data-id="6"></div>
 </div>
 <div class="notice">
 <pre>
@@ -155,6 +155,30 @@ echo htmlentities('<!-- JS to add -->
 	  length:10,
 	  decimalLength:1,
 	  showRateInfo:false
+	});
+  });
+</script>
+');
+?>
+</pre>
+</div>
+
+<!-- EXEMPLE 7 -->
+<div class="exemple">
+	<em>Exemple 7 (<strong>Can rate 3 times !</strong>) :</em>
+	<div class="exemple7" data-average="10" data-id="7"></div>
+</div>
+<div class="notice">
+<pre>
+<?php
+echo htmlentities('<!-- JS to add -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".exemple6").jRating({
+	  step:true,
+	  length : 20,
+	  canRateAgain : true,
+	  nbRates : 3
 	});
   });
 </script>
@@ -183,7 +207,7 @@ echo htmlentities('<!-- JS to add -->
 			$('.exemple2').jRating({
 				type:'small',
 				length : 40,
-				decimalLength : 1
+				decimalLength : 1,
 			});
 			
 			$('.exemple3').jRating({
@@ -210,6 +234,13 @@ echo htmlentities('<!-- JS to add -->
 			  length:10,
 			  decimalLength:1,
 			  showRateInfo:false
+			});
+			
+			$('.exemple7').jRating({
+				step:true,
+				length : 20,
+				canRateAgain : true,
+				nbRates : 3
 			});
 		});
 	</script>
