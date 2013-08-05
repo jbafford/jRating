@@ -25,7 +25,7 @@
 
 			/** Integer vars **/
 			length:5, // number of star to display
-			decimalLength : 0, // number of decimals.. Max 3, but you can complete the function 'getNote'
+			decimalLength : 0, // number of decimals.
 			rateMax : 20, // maximal rate - integer from 0 to 9999 (or more)
 			rateInfosX : -45, // relative position in X axis of the info box when mouseover
 			rateInfosY : 5, // relative position in Y axis of the info box when mouseover
@@ -193,20 +193,9 @@
 			});
 
 			function getNote(relativeX) {
-				var noteBrut = parseFloat((relativeX*100/widthRatingContainer)*opts.rateMax/100);
-				switch(opts.decimalLength) {
-					case 1 :
-						var note = Math.round(noteBrut*10)/10;
-						break;
-					case 2 :
-						var note = Math.round(noteBrut*100)/100;
-						break;
-					case 3 :
-						var note = Math.round(noteBrut*1000)/1000;
-						break;
-					default :
-						var note = Math.round(noteBrut*1)/1;
-				}
+				var noteBrut = parseFloat((relativeX*100/widthRatingContainer)*parseInt(opts.rateMax)/100);
+				var dec=Math.pow(10,parseInt(opts.decimalLength));
+				var note = Math.round(noteBrut*dec)/dec;
 				return note;
 			};
 
