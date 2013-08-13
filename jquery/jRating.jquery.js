@@ -19,9 +19,9 @@
 
 			/** Boolean vars **/
 			step:false, // if true,  mouseover binded star by star,
-			isDisabled:false,
-			showRateInfo: true,
-			canRateAgain : false,
+			isDisabled:false, // if true, user could not rate
+			showRateInfo: true, // show rates informations when cursor moves onto the plugin
+			canRateAgain : false, // if true, the user could rates {nbRates} times with jRating.. Default, 1 time
 			sendRequest: true, // send values to server
 
 			/** Integer vars **/
@@ -33,9 +33,9 @@
 			nbRates : 1,
 
 			/** Functions **/
-			onSuccess : null,
-			onError : null,
-			onClick: null
+			onSuccess : null, // Fires when the server response is ok
+			onError : null, // Fires when the server response is not ok
+			onClick: null // Fires when clicking on a star
 		};
 
 		if(this.length>0)
