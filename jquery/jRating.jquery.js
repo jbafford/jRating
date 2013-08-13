@@ -2,10 +2,10 @@
 *************************************************************************
 @Name :       	jRating - jQuery Plugin
 @Revison :    	3.0
-@Date : 		28/01/2013 
-@Author:     	 ALPIXEL - (www.myjqueryplugins.com - www.alpixel.fr) 
+@Date : 		28/01/2013
+@Author:     	 ALPIXEL - (www.myjqueryplugins.com - www.alpixel.fr)
 @License :		 Open Source - MIT License : http://www.opensource.org/licenses/mit-license.php
- 
+
 **************************************************************************
 *************************************************************************/
 (function($) {
@@ -22,11 +22,11 @@
 			isDisabled:false,
 			showRateInfo: true,
 			canRateAgain : false,
-			sendRequest: false // send values to server
+			sendRequest: true, // send values to server
 
 			/** Integer vars **/
 			length:5, // number of star to display
-			decimalLength : 0, // number of decimals.. Max 3, but you can complete the function 'getNote'
+			decimalLength : 0, // number of decimals..
 			rateMax : 20, // maximal rate - integer from 0 to 9999 (or more)
 			rateInfosX : -45, // relative position in X axis of the info box when mouseover
 			rateInfosY : 5, // relative position in Y axis of the info box when mouseover
@@ -36,12 +36,12 @@
 			onSuccess : null,
 			onError : null,
 			onClick: null
-		}; 
+		};
 
 		if(this.length>0)
 		return this.each(function() {
 			/*vars*/
-			var opts = $.extend(defaults, op),    
+			var opts = $.extend(defaults, op),
 			newWidth = 0,
 			starWidth = 0,
 			starHeight = 0,
@@ -63,8 +63,8 @@
 			widthRatingContainer = starWidth*opts.length, // Width of the Container
 			widthColor = average/opts.rateMax*widthRatingContainer, // Width of the color Container
 
-			quotient = 
-			$('<div>', 
+			quotient =
+			$('<div>',
 			{
 				'class' : 'jRatingColor',
 				css:{
@@ -72,8 +72,8 @@
 				}
 			}).appendTo($(this)),
 
-			average = 
-			$('<div>', 
+			average =
+			$('<div>',
 			{
 				'class' : 'jRatingAverage',
 				css:{
@@ -83,7 +83,7 @@
 			}).appendTo($(this)),
 
 			 jstar =
-			$('<div>', 
+			$('<div>',
 			{
 				'class' : 'jStar',
 				css:{
@@ -93,7 +93,7 @@
 					background: 'url('+bgPath+') repeat-x'
 				}
 			}).appendTo($(this));
-			
+
 
 			$(this).css({width: widthRatingContainer,overflow:'hidden',zIndex:1,position:'relative'});
 
@@ -103,7 +103,7 @@
 					var realOffsetLeft = findRealLeft(this);
 					var relativeX = e.pageX - realOffsetLeft;
 					if (opts.showRateInfo)
-					var tooltip = 
+					var tooltip =
 					$('<p>',{
 						'class' : 'jRatingInfos',
 						html : getNote(relativeX)+' <span class="maxRate">/ '+opts.rateMax+'</span>',
@@ -114,7 +114,7 @@
 					}).appendTo('body').show();
 				},
 				mouseover : function(e){
-					$(this).css('cursor','pointer');	
+					$(this).css('cursor','pointer');
 				},
 				mouseout : function(){
 					$(this).css('cursor','default');
@@ -126,7 +126,7 @@
 					var relativeX = e.pageX - realOffsetLeft;
 					if(opts.step) newWidth = Math.floor(relativeX/starWidth)*starWidth + starWidth;
 					else newWidth = relativeX;
-					average.width(newWidth);					
+					average.width(newWidth);
 					if (opts.showRateInfo)
 					$("p.jRatingInfos")
 					.css({
@@ -139,19 +139,19 @@
 				},
 				click : function(e){
                     var element = this;
-					
+
 					/*set vars*/
 					hasRated = true;
 					globalWidth = newWidth;
 					nbOfRates--;
-					
+
 					if(!opts.canRateAgain || parseInt(nbOfRates) <= 0) $(this).unbind().css('cursor','default').addClass('jDisabled');
-					
+
 					if (opts.showRateInfo) $("p.jRatingInfos").fadeOut('fast',function(){$(this).remove();});
 					e.preventDefault();
 					var rate = getNote(newWidth);
 					average.width(newWidth);
-					
+
 
 					/** ONLY FOR THE DEMO, YOU CAN REMOVE THIS CODE **/
 						$('.datasSent p').html('<strong>idBox : </strong>'+idBox+'<br /><strong>rate : </strong>'+rate+'<br /><strong>action :</strong> rating');
@@ -159,7 +159,7 @@
 					/** END ONLY FOR THE DEMO **/
 
 					if(opts.onClick) opts.onClick( element, rate );
-					
+
 					if(opts.sendRequest) {
 						$.post(opts.phpPath,{
 								idBox : idBox,
@@ -172,21 +172,21 @@
 									/** ONLY FOR THE DEMO, YOU CAN REMOVE THIS CODE **/
 										$('.serverResponse p').html(data.server);
 									/** END ONLY FOR THE DEMO **/
-	
-	
-									/** Here you can display an alert box, 
+
+
+									/** Here you can display an alert box,
 										or use the jNotify Plugin :) http://www.myqjqueryplugins.com/jNotify
 										exemple :	*/
 									if(opts.onSuccess) opts.onSuccess( element, rate );
 								}
 								else
 								{
-	
+
 									/** ONLY FOR THE DEMO, YOU CAN REMOVE THIS CODE **/
 										$('.serverResponse p').html(data.server);
 									/** END ONLY FOR THE DEMO **/
-	
-									/** Here you can display an alert box, 
+
+									/** Here you can display an alert box,
 										or use the jNotify Plugin :) http://www.myqjqueryplugins.com/jNotify
 										exemple :	*/
 									if(opts.onError) opts.onError( element, rate );
@@ -195,25 +195,14 @@
 							'json'
 						);
 					}
-					
+
 				}
 			});
 
 			function getNote(relativeX) {
-				var noteBrut = parseFloat((relativeX*100/widthRatingContainer)*opts.rateMax/100);
-				switch(opts.decimalLength) {
-					case 1 :
-						var note = Math.round(noteBrut*10)/10;
-						break;
-					case 2 :
-						var note = Math.round(noteBrut*100)/100;
-						break;
-					case 3 :
-						var note = Math.round(noteBrut*1000)/1000;
-						break;
-					default :
-						var note = Math.round(noteBrut*1)/1;
-				}
+				var noteBrut = parseFloat((relativeX*100/widthRatingContainer)*parseInt(opts.rateMax)/100);
+		        var dec=Math.pow(10,parseInt(opts.decimalLength));
+		        var note = Math.round(noteBrut*dec)/dec;
 				return note;
 			};
 

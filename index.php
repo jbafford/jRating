@@ -4,7 +4,7 @@
 	<title>Pluggin jRating : Ajax rating system with jQuery</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="jquery/jRating.jquery.css" type="text/css" />
-	
+
 	<style type="text/css">
 		body {margin:15px;font-family:Arial;font-size:13px}
 		a img{border:0}
@@ -67,7 +67,7 @@ echo htmlentities('<!-- JS to add -->
 ?>
 </pre>
 </div>
-	
+
 <!-- EXEMPLE 3 -->
 <div class="exemple">
 	<em>Exemple 3 (step : <strong>true</strong> - average <strong>18</strong> - id <strong>3</strong> - <strong>15</strong> stars) :</em>
@@ -203,22 +203,22 @@ echo htmlentities('<!-- JS to add -->
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.basic').jRating();
-			
+
 			$('.exemple2').jRating({
 				type:'small',
 				length : 40,
 				decimalLength : 1,
 			});
-			
+
 			$('.exemple3').jRating({
 				step:true,
-				length : 20 
+				length : 20
 			});
-			
+
 			$('.exemple4').jRating({
 				isDisabled : true
 			});
-			
+
 			$('.exemple5').jRating({
 				length:10,
 				decimalLength:1,
@@ -229,13 +229,13 @@ echo htmlentities('<!-- JS to add -->
 					alert('Error : please retry');
 				}
 			});
-			
+
 			$(".exemple6").jRating({
 			  length:10,
 			  decimalLength:1,
 			  showRateInfo:false
 			});
-			
+
 			$('.exemple7').jRating({
 				step:true,
 				length : 20,
