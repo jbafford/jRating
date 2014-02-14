@@ -31,7 +31,7 @@
 			rateMax : 20, // maximal rate - integer from 0 to 9999 (or more)
 			rateInfosX : -45, // relative position in X axis of the info box when mouseover
 			rateInfosY : 5, // relative position in Y axis of the info box when mouseover
-			nbRates : 1,
+			nbRates : 1, // maximum number of times a rating can be selected; set to <= 0 for unlimited
 			starWidth: 0, //width of star if type == custom
 			starHeight: 0, //height of star if type == custom
 
@@ -51,7 +51,7 @@
 			bgPath = '',
 			hasRated = false,
 			globalWidth = 0,
-			nbOfRates = opts.nbRates;
+			nbOfRates = (opts.canRateAgain ? opts.nbRates : 1);
 
 			if($(this).hasClass('jDisabled') || opts.isDisabled)
 				var jDisabled = true;
@@ -146,9 +146,9 @@
 					/*set vars*/
 					hasRated = true;
 					globalWidth = newWidth;
-					nbOfRates--;
 
-					if(!opts.canRateAgain || parseInt(nbOfRates) <= 0) $(this).unbind().css('cursor','default').addClass('jDisabled');
+					if(--nbOfRates == 0)
+						$(this).unbind().css('cursor','default').addClass('jDisabled');
 
 					if (opts.showRateInfo) $("p.jRatingInfos").fadeOut('fast',function(){$(this).remove();});
 					e.preventDefault();
