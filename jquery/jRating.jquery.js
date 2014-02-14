@@ -14,8 +14,9 @@
 			/** String vars **/
 			bigStarsPath : 'jquery/icons/stars.png', // path of the icon stars.png
 			smallStarsPath : 'jquery/icons/small.png', // path of the icon small.png
+			customStarsPath: '', //path for a custom star image
 			phpPath : 'php/jRating.php', // path of the php file jRating.php
-			type : 'big', // can be set to 'small' or 'big'
+			type : 'big', // can be set to 'small', 'big', or 'custom'
 
 			/** Boolean vars **/
 			step:false, // if true,  mouseover binded star by star,
@@ -31,6 +32,8 @@
 			rateInfosX : -45, // relative position in X axis of the info box when mouseover
 			rateInfosY : 5, // relative position in Y axis of the info box when mouseover
 			nbRates : 1,
+			starWidth: 0, //width of star if type == custom
+			starHeight: 0, //height of star if type == custom
 
 			/** Functions **/
 			onSuccess : null, // Fires when the server response is ok
@@ -43,8 +46,8 @@
 			/*vars*/
 			var opts = $.extend(defaults, op),
 			newWidth = 0,
-			starWidth = 0,
-			starHeight = 0,
+			starWidth = opts.starWidth,
+			starHeight = opts.starHeight,
 			bgPath = '',
 			hasRated = false,
 			globalWidth = 0,
@@ -213,10 +216,14 @@
 						starHeight = 10; // height of the picture small.png
 						bgPath = opts.smallStarsPath;
 					break;
-					default :
+					case 'big':
 						starWidth = 23; // width of the picture stars.png
 						starHeight = 20; // height of the picture stars.png
 						bgPath = opts.bigStarsPath;
+						break;
+					
+					default:
+						bgPath = opts.customStarsPath;
 				}
 			};
 
